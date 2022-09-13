@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T2 JS - Rizky Dharma S</title>
+  </head>
+  <body>
+    <h2 align="center">Daftar Pegawai</h2>
+    <table align="center" cellpadding="10" border="1">
+      <thead>
+        <tr bgcolor="lightcyan">
+          <th>NO</th>
+          <th>NAMA</th>
+          <th>JABATAN</th>
+          <th>AGAMA</th>
+          <th>GAJI POKOK</th>
+          <th>TUNJANGAN JABATAN</th>
+          <th>TUNJANGAN KESEHATAN</th>
+          <th>GAJI KOTOR</th>
+          <th>ZAKAT PROFESI</th>
+          <th>TAKE HOME PAY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <script language="javascript">
+          // Struktur Kondisi
+          let jabatan, agama, gajiPokok, tunjangan_jabatan, tunjangan_kesehatan, gajiKotor, zakat, takeHome, warna;
+          for (let i = 1; i <= 100; i++) {
+            if (i <= 25) {
+              jabatan = "Manager";
+            } else if (i <= 50) {
+              jabatan = "Asisten Manager";
+            } else if (i <= 75) {
+              jabatan = "Supervisor";
+            } else {
+              jabatan = "Staff";
+            }
+
+            // Gaji pokok menggunakan Switch Case
+            switch (jabatan) {
+              case "Manager":
+                gajiPokok = 15000000;
+                break;
+              case "Asisten Manager":
+                gajiPokok = 10000000;
+                break;
+              case "Supervisor":
+                gajiPokok = 7000000;
+                break;
+              case "Staff":
+                gajiPokok = 4000000;
+                break;
+              default:
+                gajiPokok = 0;
+                break;
+            }
+
+            tunjangan_jabatan = (gajiPokok * 20) / 100;
+            tunjangan_kesehatan = (gajiPokok * 10) / 100;
+            gajiKotor = gajiPokok + tunjangan_jabatan + tunjangan_kesehatan;
+
+            // Ternary
+            agama = i % 2 < 1 ? "Non Muslim" : "Muslim";
+            warna = agama == "Non Muslim" ? "lightcyan" : "lightyellow";
+            zakat = agama == "Muslim" && gajiKotor >= 7000000 ? (gajiKotor * 2.5) / 100 : 0;
+            //--------------------------
+            takeHome = gajiKotor - zakat;
+
+            // Print
+            document.write(`
+          <tr bgcolor="${warna}">
+              <td>${i}</td>
+              <td>Pegawai &nbsp;${i}</td>
+              <td>${jabatan}</td>
+              <td>${agama}</td>
+              <td align="right">${gajiPokok}</td>
+              <td align="right">${tunjangan_jabatan}</td>
+              <td align="right">${tunjangan_kesehatan}</td>
+              <td align="right">${gajiKotor}</td>
+              <td align="right">${zakat}</td>
+              <td align="right">${takeHome}</td>
+          </tr>
+  `);
+          }
+        </script>
+      </tbody>
+    </table>
+  </body>
+</html>
